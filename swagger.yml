@@ -1,0 +1,141 @@
+consumes:
+  - application/io.goswagger.examples.pinterest-clone.v1+json
+info:
+  description: API spec for pinterest-clone
+  title: pinterest-clone API
+  version: 1.0.0
+paths: {}
+produces:
+  - application/io.goswagger.examples.pinterest-clone.v1+json
+schemes:
+  - http
+swagger: "2.0"
+paths:
+  /feed:
+    get:
+      tags:
+        - pinterest
+      operationId: feed
+      parameters:
+        - name: user_id
+          in: query
+          type: string
+          format: string
+          required: true
+      responses:
+        200:
+          description: the user's home feed
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/pin"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+  /pins:
+    get:
+      tags:
+        - pinterest
+      operationId: pins
+      parameters:
+        - name: user_id
+          in: query
+          type: string
+          format: string
+          required: true
+      responses:
+        200:
+          description: the user's pins
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/pin"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/error"
+  /pin:
+    get:
+      tags:
+        - pinterest
+      operationId: pin
+      parameters:
+        - name: pin_id
+          in: query
+          type: string
+          format: string
+          required: true
+      responses:
+        200:
+          description: a pin
+          schema:
+            $ref: "#/definitions/pin"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/error"
+  /user:
+    get:
+      tags:
+        - pinterest
+      operationId: user
+      parameters:
+        - name: user_id
+          in: query
+          type: string
+          format: string
+          required: true
+      responses:
+        200:
+          description: a user
+          schema:
+            $ref: "#/definitions/user"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/error"
+definitions:
+  user:
+    type: object
+    properties:
+      name:
+        type: string
+        minLength: 1
+      image_url:
+        type: string
+        minLength: 1
+      followers:
+        type: integer
+        format: int64
+      following:
+        type: integer
+        format: int64
+  pin:
+    type: object
+    properties:
+      image_url:
+        type: string
+        minLength: 1
+      source_url:
+        type: string
+        minLength: 1
+      title:
+        type: string
+        minLength: 1
+      description:
+        type: string
+        minLength: 1
+      posted_by:
+        type: string
+        minLength: 1
+  error:
+    type: object
+    required:
+      - message
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string
