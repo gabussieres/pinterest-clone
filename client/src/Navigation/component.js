@@ -13,7 +13,7 @@ const onSuccess = response => {
 };
 const onFailure = response => console.error(response);
 
-const Navigation = () => (
+const Navigation = props => (
   <Nav>
     <NavList>
       <NavButton logo="true" href="/">
@@ -24,7 +24,7 @@ const Navigation = () => (
       <NavButton>
         <GitHubLogin
           clientId="ce9f5d621c5709bf97e5"
-          onSuccess={() => onSuccess()(this.props)}
+          onSuccess={() => onSuccess()(props)}
           onFailure={onFailure}
           redirectUri=""
         />

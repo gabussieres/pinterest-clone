@@ -80,7 +80,7 @@ There are a few things I would have added, but couldn't due to time constraints.
 
 1. Deploying the API to a server
 
-I would distribute the service over 2 ECS clusters (in case one goes down). However, I am interested in learning how to leverage EKS (Kubernetes) to manage microservices.
+Currently working on deploying to heroku. Realistically, I would distribute the service over 2 ECS clusters (in case one goes down). However, I am interested in learning how to leverage EKS (Kubernetes) to manage microservices.
 
 - Note: Since the API is not hosted, the frontend implementation for deleting pins required a workaround, since delete operations cannot be performed without CORS. Therefore, the DELETE method for pins was temporarily converted into a GET.
 
