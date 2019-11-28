@@ -17,19 +17,3 @@ export function* fetchUser(action) {
 export function* watchFetchUser() {
   yield takeEvery(actions.FETCH_USER, fetchUser);
 }
-
-export function* fetchUserPins(action) {
-  try {
-    yield put(actions.fetchingUserPins());
-    const result = yield Api.fetchUserPins(action.user_id);
-
-    yield put(actions.fetchUserPinsSuccess(result));
-  } catch (e) {
-    console.log(e);
-    yield put(actions.fetchUserPinsFailure(e));
-  }
-}
-
-export function* watchFetchUserPins() {
-  yield takeEvery(actions.FETCH_USER_PINS, fetchUserPins);
-}

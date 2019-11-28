@@ -37,13 +37,11 @@ async function getResourceForDeletePin(path) {
 
 async function fetchUser(user_id) {
   const response = await getResource(`${URL}/user?user_id=${user_id}`);
-  console.log("response", response);
   return response;
 }
 
 async function fetchPinDetails(pin_id) {
   const response = await getResource(`${URL}/pin?pin_id=${pin_id}`);
-  console.log("response", response);
   return response;
 }
 
@@ -51,13 +49,11 @@ async function fetchUserPins(user_id, pin_id) {
   const response = await getResource(
     `${URL}/pins?user_id=${user_id}&pin_id=${pin_id}`
   );
-  console.log("response", response);
   return response;
 }
 
 async function fetchFeed(pinAmount) {
   const response = await getResource(`${URL}/feed?pin_amount=${pinAmount}`);
-  console.log("response", response);
   return response;
 }
 
@@ -65,7 +61,6 @@ async function deletePin(user_id, pin_id) {
   const response = await getResourceForDeletePin(
     `${URL}/delete_pin?user_id=${user_id}&pin_id=${pin_id}`
   );
-  console.log("response", response);
   return response;
 }
 

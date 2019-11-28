@@ -1,16 +1,13 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 
 import { AppWrapper } from "./styles";
-import Navigation from "../Navigation/component";
-import UserContainer from "../User/container";
+import Navigation from "../Navigation/container";
+import UserContainer from "../UserProfile/container";
 
 const UserProfile = userId => (
   <AppWrapper className="App">
     <Navigation />
-    <Row>
-      <UserContainer userId={userId} />
-    </Row>
+    <UserContainer userId={userId} />
   </AppWrapper>
 );
 

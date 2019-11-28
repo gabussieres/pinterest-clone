@@ -12,7 +12,6 @@ export function feed(state = InitialState, action) {
     case ActionTypes.FETCHING_FEED: {
       return {
         ...state,
-        pins: [],
         fetchStatus: FetchStatus.loading,
         error: null
       };
@@ -20,7 +19,7 @@ export function feed(state = InitialState, action) {
     case ActionTypes.FETCH_FEED_SUCCESS: {
       return {
         ...state,
-        pins: action.results,
+        pins: state.pins.concat(action.results),
         fetchStatus: FetchStatus.loaded,
         error: null
       };
@@ -28,7 +27,6 @@ export function feed(state = InitialState, action) {
     case ActionTypes.FETCH_FEED_FAILURE: {
       return {
         ...state,
-        pins: [],
         fetchStatus: FetchStatus.failed,
         error: action.message
       };

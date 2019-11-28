@@ -1,31 +1,31 @@
-export const FETCH_USER = "FETCH_USER";
-export const FETCHING_USER = "FETCHING_USER";
-export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
-export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
+export const FETCH_USER_PROFILE = "FETCH_USER_PROFILE";
+export const FETCHING_USER_PROFILE = "FETCHING_USER_PROFILE";
+export const FETCH_USER_PROFILE_SUCCESS = "FETCH_USER_PROFILE_SUCCESS";
+export const FETCH_USER_PROFILE_FAILURE = "FETCH_USER_PROFILE_FAILURE";
 
 export const FETCH_USER_PINS = "FETCH_USER_PINS";
 export const FETCHING_USER_PINS = "FETCHING_USER_PINS";
 export const FETCH_USER_PINS_SUCCESS = "FETCH_USER_PINS_SUCCESS";
 export const FETCH_USER_PINS_FAILURE = "FETCH_USER_PINS_FAILURE";
 
-export function fetchUser(user_id = "") {
-  return { type: FETCH_USER, user_id };
+export function fetchUserProfile(user_id = "") {
+  return { type: FETCH_USER_PROFILE, user_id };
 }
 
-export function fetchingUser() {
-  return { type: FETCHING_USER };
+export function fetchingUserProfile() {
+  return { type: FETCHING_USER_PROFILE };
 }
 
-export function fetchUserSuccess(results) {
+export function fetchUserProfileSuccess(results) {
   return {
-    type: FETCH_USER_SUCCESS,
+    type: FETCH_USER_PROFILE_SUCCESS,
     results
   };
 }
 
-export function fetchUserFailure(message) {
+export function fetchUserProfileFailure(message) {
   return {
-    type: FETCH_USER_FAILURE,
+    type: FETCH_USER_PROFILE_FAILURE,
     message
   };
 }

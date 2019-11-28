@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import { PinList } from "../PinList/component";
 import { Row, Col } from "react-bootstrap";
+
 import { FetchStatus } from "../constants/entityStatus";
 import { LeftWrapper, RightWrapper, ImageWrapper } from "./styles";
+import { PinList } from "../PinList/component";
 
-class User extends Component {
+class UserProfile extends Component {
   constructor(props) {
     super(props);
-    props.fetchUser(props.userId);
+    props.fetchUserProfile(props.userId);
     props.fetchUserPins(props.userId);
   }
 
   render() {
-    const { user, error, fetchStatus } = this.props.user.user;
+    const { user, error, fetchStatus } = this.props.user.userProfile;
     const { name, followers, following, image_url } = user;
     if (error != null) {
       return null;
@@ -40,10 +41,10 @@ class User extends Component {
             </div>
           </Row>
         ) : null}
-        <Row>{PinList(this.props.user.pins.pins, fetchStatus)}</Row>
+        {PinList(this.props.user.pins.pins, fetchStatus)}
       </div>
     );
   }
 }
 
-export default User;
+export default UserProfile;

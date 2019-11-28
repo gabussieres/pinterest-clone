@@ -29,7 +29,7 @@ function PinDetailsRoute() {
 const AppWrapper = styled.div`
   background-color: #fafafa;
   position: "absolute";
-  height: "100% !important"
+  height: "100% !important";
   width: "100% !important";
 `;
 
@@ -53,7 +53,7 @@ function App() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router store={store} onUpdate={() => window.scrollTo(0, 0)}>
+    <Router store={store}>
       <App />
     </Router>
   </Provider>,
