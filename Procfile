@@ -1,0 +1,1 @@
+web bin/pinterest-clone-server --host 0.0.0.0
