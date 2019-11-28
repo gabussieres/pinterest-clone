@@ -36,7 +36,7 @@ type FeedParams struct {
 	  Required: true
 	  In: query
 	*/
-	UserID string
+	PinAmount string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -50,8 +50,8 @@ func (o *FeedParams) BindRequest(r *http.Request, route *middleware.MatchedRoute
 
 	qs := runtime.Values(r.URL.Query())
 
-	qUserID, qhkUserID, _ := qs.GetOK("user_id")
-	if err := o.bindUserID(qUserID, qhkUserID, route.Formats); err != nil {
+	qPinAmount, qhkPinAmount, _ := qs.GetOK("pin_amount")
+	if err := o.bindPinAmount(qPinAmount, qhkPinAmount, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -61,10 +61,10 @@ func (o *FeedParams) BindRequest(r *http.Request, route *middleware.MatchedRoute
 	return nil
 }
 
-// bindUserID binds and validates parameter UserID from query.
-func (o *FeedParams) bindUserID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindPinAmount binds and validates parameter PinAmount from query.
+func (o *FeedParams) bindPinAmount(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
-		return errors.Required("user_id", "query")
+		return errors.Required("pin_amount", "query")
 	}
 	var raw string
 	if len(rawData) > 0 {
@@ -73,11 +73,11 @@ func (o *FeedParams) bindUserID(rawData []string, hasKey bool, formats strfmt.Re
 
 	// Required: true
 	// AllowEmptyValue: false
-	if err := validate.RequiredString("user_id", "query", raw); err != nil {
+	if err := validate.RequiredString("pin_amount", "query", raw); err != nil {
 		return err
 	}
 
-	o.UserID = raw
+	o.PinAmount = raw
 
 	return nil
 }

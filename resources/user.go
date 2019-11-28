@@ -14,6 +14,7 @@ import (
 type UserInterface interface {
 	Get() (user *models.User, err error)
 	QueryPins() (pinIDs Pins, err error)
+	DeletePin(pinID string) error
 }
 
 // User is the string representation of a user ID. It implements the UserInterface
@@ -54,8 +55,18 @@ func (u User) queryPins(dynamo DynamoInterface) (pinIDs Pins, err error) {
 	}
 
 	for _, item := range result.Items {
-		id := item[config.PinterestConfig.DynamoConfig.UserPinsTable.SortKey].N
+		id := item[config.PinterestConfig.DynamoConfig.UserPinsTable.SortKey].S
 		pinIDs = append(pinIDs, Pin(*id))
 	}
+	return
+}
+
+// DeletePin deletes a user's given, given the pin ID
+func (u User) DeletePin(pinID string) error {
+	return u.deletePin(pinID, Dynamo{})
+}
+
+func (u User) deletePin(pinID string, dynamo DynamoInterface) (err error) {
+	_, err = dynamo.Delete(string(u), pinID, config.PinterestConfig.DynamoConfig.UserPinsTable)
 	return
 }

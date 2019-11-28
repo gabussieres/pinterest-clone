@@ -16,7 +16,7 @@ import (
 // FeedOKCode is the HTTP code returned for type FeedOK
 const FeedOKCode int = 200
 
-/*FeedOK the user's home feed
+/*FeedOK returns pin_amount (number) images for the user's home feed
 
 swagger:response feedOK
 */

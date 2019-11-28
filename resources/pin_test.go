@@ -80,6 +80,9 @@ func (f fakeDBClientPinHappyPath) GetItem(id string, tableConfig config.TableCon
 			"posted_by": {
 				S: createString("posted_by"),
 			},
+			"id": {
+				S: createString("id"),
+			},
 		},
 	}
 	return
@@ -103,6 +106,9 @@ func (f fakeDBClientPinHappyPath) BatchGetItem(id interface{}, tableConfig confi
 				"posted_by": {
 					S: createString("posted_by"),
 				},
+				"id": {
+					S: createString("id"),
+				},
 			}, {
 				"title": {
 					S: &testPinID2,
@@ -119,6 +125,9 @@ func (f fakeDBClientPinHappyPath) BatchGetItem(id interface{}, tableConfig confi
 				"posted_by": {
 					S: createString("posted_by"),
 				},
+				"id": {
+					S: createString("id"),
+				},
 			}},
 		},
 	}
@@ -130,7 +139,7 @@ func TestGetPinHappyPath(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no error. Got %v", err)
 	}
-	expectedPin := &models.Pin{Title: testPinID1, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by"}
+	expectedPin := &models.Pin{Title: testPinID1, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by", ID: "id"}
 	if !reflect.DeepEqual(pin, expectedPin) {
 		t.Errorf("Expected %v. Got %v", expectedPin, pin)
 	}
@@ -141,8 +150,8 @@ func TestBatchGetPinHappyPath(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no error. Got %v", err)
 	}
-	expectedPin1 := &models.Pin{Title: testPinID1, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by"}
-	expectedPin2 := &models.Pin{Title: testPinID2, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by"}
+	expectedPin1 := &models.Pin{Title: testPinID1, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by", ID: "id"}
+	expectedPin2 := &models.Pin{Title: testPinID2, Description: "description", ImageURL: "image_url", SourceURL: "source_url", PostedBy: "posted_by", ID: "id"}
 	if !reflect.DeepEqual(pins[0], expectedPin1) {
 		t.Errorf("Expected %v. Got %v", expectedPin1, pins[0])
 	}

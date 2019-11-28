@@ -49,7 +49,7 @@ func (p Pin) get(dynamo DynamoInterface) (pin *models.Pin, err error) {
 }
 
 // Concatenate loads new Pin IDs into Pins
-func (p Pins) Concatenate(pins Pins) {
+func (p *Pins) Concatenate(pins Pins) {
 	p.concatenate(pins)
 }
 

@@ -21,6 +21,10 @@ type Pin struct {
 	// Min Length: 1
 	Description string `json:"description,omitempty"`
 
+	// id
+	// Min Length: 1
+	ID string `json:"id,omitempty"`
+
 	// image url
 	// Min Length: 1
 	ImageURL string `json:"image_url,omitempty"`
@@ -43,6 +47,10 @@ func (m *Pin) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,6 +83,19 @@ func (m *Pin) validateDescription(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MinLength("description", "body", string(m.Description), 1); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Pin) validateID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ID) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("id", "body", string(m.ID), 1); err != nil {
 		return err
 	}
 

@@ -4,8 +4,15 @@ import (
 	"errors"
 	"pinterest-clone/models"
 	"pinterest-clone/resources"
+	"pinterest-clone/restapi/operations/pinterest"
 	"reflect"
 	"testing"
+)
+
+var (
+	testFeedParams = pinterest.FeedParams{
+		PinAmount: "10",
+	}
 )
 
 type fakeFeedBatchGetError struct{}
@@ -19,7 +26,7 @@ func (f fakeFeedBatchGetError) Concatenate(pins resources.Pins) {
 }
 
 func TestHandleFeedCallBatchGetError(t *testing.T) {
-	_, err := handleFeedCall(fakeFeedBatchGetError{})
+	_, err := handleFeedCall(fakeFeedBatchGetError{}, testFeedParams)
 	if err == nil {
 		t.Errorf("Expected an error. Got %v", err)
 	}
@@ -37,7 +44,7 @@ func (f fakeFeed) BatchGet() (pinIDs []*models.Pin, err error) {
 }
 
 func TestHandleFeedCallHappyPath(t *testing.T) {
-	pins, err := handleFeedCall(fakeFeed{})
+	pins, err := handleFeedCall(fakeFeed{}, testFeedParams)
 	if err != nil {
 		t.Errorf("Expected no error. Got %v", err)
 	}

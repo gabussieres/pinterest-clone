@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/rs/cors"
+
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
@@ -36,9 +38,18 @@ func configureAPI(api *operations.PinterestCloneAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	if api.PinterestDeletePinHandler == nil {
+		api.PinterestDeletePinHandler = pinterest.DeletePinHandlerFunc(func(params pinterest.DeletePinParams) middleware.Responder {
+			err := controllers.HandleDeletePinCall(params)
+			if err != nil {
+				return pinterest.NewFeedDefault(500)
+			}
+			return pinterest.NewDeletePinOK()
+		})
+	}
 	if api.PinterestFeedHandler == nil {
 		api.PinterestFeedHandler = pinterest.FeedHandlerFunc(func(params pinterest.FeedParams) middleware.Responder {
-			feed, err := controllers.HandleFeedCall()
+			feed, err := controllers.HandleFeedCall(params)
 			if err != nil {
 				return pinterest.NewFeedDefault(500)
 			}
@@ -100,5 +111,6 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	handleCORS := cors.Default().Handler
+	return handleCORS(handler)
 }

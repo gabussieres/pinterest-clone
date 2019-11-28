@@ -54,6 +54,10 @@ func (f fakeDBClientEmptyResult) Query(in *dynamodb.QueryInput) (out *dynamodb.Q
 	out = &dynamodb.QueryOutput{}
 	return
 }
+func (f fakeDBClientEmptyResult) DeleteItem(in *dynamodb.DeleteItemInput) (out *dynamodb.DeleteItemOutput, err error) {
+	out = &dynamodb.DeleteItemOutput{}
+	return
+}
 
 func TestGetEmptyResult(t *testing.T) {
 	d := Dynamo{}
@@ -86,6 +90,18 @@ func TestQueryEmptyResult(t *testing.T) {
 		t.Errorf("Expected no error. Got %v", err)
 	}
 	expectedResult := &dynamodb.QueryOutput{}
+	if !reflect.DeepEqual(res, expectedResult) {
+		t.Errorf("Expected %v. Got %v", expectedResult, res)
+	}
+}
+
+func TestDeleteEmptyResult(t *testing.T) {
+	d := Dynamo{}
+	res, err := d.delete(&fakeDBClientEmptyResult{}, testID1, testID2, testTableConfig)
+	if err != nil {
+		t.Errorf("Expected no error. Got %v", err)
+	}
+	expectedResult := &dynamodb.DeleteItemOutput{}
 	if !reflect.DeepEqual(res, expectedResult) {
 		t.Errorf("Expected %v. Got %v", expectedResult, res)
 	}

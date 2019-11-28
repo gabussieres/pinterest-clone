@@ -13,7 +13,7 @@ import (
 
 // FeedURL generates an URL for the feed operation
 type FeedURL struct {
-	UserID string
+	PinAmount string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -46,9 +46,9 @@ func (o *FeedURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
-	userIDQ := o.UserID
-	if userIDQ != "" {
-		qs.Set("user_id", userIDQ)
+	pinAmountQ := o.PinAmount
+	if pinAmountQ != "" {
+		qs.Set("pin_amount", pinAmountQ)
 	}
 
 	_result.RawQuery = qs.Encode()

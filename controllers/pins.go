@@ -9,7 +9,7 @@ import (
 // HandlePinsCall handles the /pins call, returns an array of pins for the given UserID
 func HandlePinsCall(params pinterest.PinsParams) ([]*models.Pin, error) {
 	user := resources.User(params.UserID)
-	pins := resources.Pins{}
+	pins := &resources.Pins{}
 	return handlePinsCall(params, user, pins)
 }
 

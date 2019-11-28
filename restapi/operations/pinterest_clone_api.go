@@ -25,24 +25,25 @@ import (
 // NewPinterestCloneAPI creates a new PinterestClone instance
 func NewPinterestCloneAPI(spec *loads.Document) *PinterestCloneAPI {
 	return &PinterestCloneAPI{
-		handlers:             make(map[string]map[string]http.Handler),
-		formats:              strfmt.Default,
-		defaultConsumes:      "application/json",
-		defaultProduces:      "application/json",
-		customConsumers:      make(map[string]runtime.Consumer),
-		customProducers:      make(map[string]runtime.Producer),
-		ServerShutdown:       func() {},
-		spec:                 spec,
-		ServeError:           errors.ServeError,
-		BasicAuthenticator:   security.BasicAuth,
-		APIKeyAuthenticator:  security.APIKeyAuth,
-		BearerAuthenticator:  security.BearerAuth,
-		JSONConsumer:         runtime.JSONConsumer(),
-		JSONProducer:         runtime.JSONProducer(),
-		PinterestFeedHandler: nil,
-		PinterestPinHandler:  nil,
-		PinterestPinsHandler: nil,
-		PinterestUserHandler: nil,
+		handlers:                  make(map[string]map[string]http.Handler),
+		formats:                   strfmt.Default,
+		defaultConsumes:           "application/json",
+		defaultProduces:           "application/json",
+		customConsumers:           make(map[string]runtime.Consumer),
+		customProducers:           make(map[string]runtime.Producer),
+		ServerShutdown:            func() {},
+		spec:                      spec,
+		ServeError:                errors.ServeError,
+		BasicAuthenticator:        security.BasicAuth,
+		APIKeyAuthenticator:       security.APIKeyAuth,
+		BearerAuthenticator:       security.BearerAuth,
+		JSONConsumer:              runtime.JSONConsumer(),
+		JSONProducer:              runtime.JSONProducer(),
+		PinterestDeletePinHandler: nil,
+		PinterestFeedHandler:      nil,
+		PinterestPinHandler:       nil,
+		PinterestPinsHandler:      nil,
+		PinterestUserHandler:      nil,
 	}
 }
 
@@ -74,6 +75,8 @@ type PinterestCloneAPI struct {
 	// JSONProducer registers a producer for a "application/io.goswagger.examples.pinterest-clone.v1+json" mime type
 	JSONProducer runtime.Producer
 
+	// PinterestDeletePinHandler sets the operation handler for the delete pin operation
+	PinterestDeletePinHandler pinterest.DeletePinHandler
 	// PinterestFeedHandler sets the operation handler for the feed operation
 	PinterestFeedHandler pinterest.FeedHandler
 	// PinterestPinHandler sets the operation handler for the pin operation
@@ -143,6 +146,10 @@ func (o *PinterestCloneAPI) Validate() error {
 
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
+	}
+
+	if o.PinterestDeletePinHandler == nil {
+		unregistered = append(unregistered, "pinterest.DeletePinHandler")
 	}
 
 	if o.PinterestFeedHandler == nil {
@@ -258,6 +265,11 @@ func (o *PinterestCloneAPI) initHandlerCache() {
 	if o.handlers == nil {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
+
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/delete_pin"] = pinterest.NewDeletePin(o.context, o.PinterestDeletePinHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)

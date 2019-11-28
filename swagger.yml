@@ -17,14 +17,14 @@ paths:
         - pinterest
       operationId: feed
       parameters:
-        - name: user_id
+        - name: pin_amount
           in: query
           type: string
           format: string
           required: true
       responses:
         200:
-          description: the user's home feed
+          description: returns pin_amount (number) images for the user's home feed
           schema:
             type: array
             items:
@@ -71,6 +71,31 @@ paths:
           description: a pin
           schema:
             $ref: "#/definitions/pin"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/error"
+  # /delete_pin should be a delete operation on /pin, but needed to work around CORS, 
+  # so for our purposes I'm creating a temporary GET endpoint to handle the deletion
+  /delete_pin:
+    get:
+      tags:
+        - pinterest
+      operationId: delete_pin
+      parameters:
+        - name: pin_id
+          in: query
+          type: string
+          format: string
+          required: true
+        - name: user_id
+          in: query
+          type: string
+          format: string
+          required: true
+      responses:
+        200:
+          description: pin is deleted
         default:
           description: error
           schema:
@@ -127,6 +152,9 @@ definitions:
         type: string
         minLength: 1
       posted_by:
+        type: string
+        minLength: 1
+      id:
         type: string
         minLength: 1
   error:

@@ -34,13 +34,20 @@ func init() {
     "version": "1.0.0"
   },
   "paths": {
-    "/feed": {
+    "/delete_pin": {
       "get": {
         "tags": [
           "pinterest"
         ],
-        "operationId": "feed",
+        "operationId": "delete_pin",
         "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_id",
+            "in": "query",
+            "required": true
+          },
           {
             "type": "string",
             "format": "string",
@@ -51,7 +58,35 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "the user's home feed",
+            "description": "pin is deleted"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/feed": {
+      "get": {
+        "tags": [
+          "pinterest"
+        ],
+        "operationId": "feed",
+        "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_amount",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns pin_amount (number) images for the user's home feed",
             "schema": {
               "type": "array",
               "items": {
@@ -185,6 +220,10 @@ func init() {
       "type": "object",
       "properties": {
         "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
           "type": "string",
           "minLength": 1
         },
@@ -246,13 +285,20 @@ func init() {
     "version": "1.0.0"
   },
   "paths": {
-    "/feed": {
+    "/delete_pin": {
       "get": {
         "tags": [
           "pinterest"
         ],
-        "operationId": "feed",
+        "operationId": "delete_pin",
         "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_id",
+            "in": "query",
+            "required": true
+          },
           {
             "type": "string",
             "format": "string",
@@ -263,7 +309,35 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "the user's home feed",
+            "description": "pin is deleted"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/feed": {
+      "get": {
+        "tags": [
+          "pinterest"
+        ],
+        "operationId": "feed",
+        "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_amount",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns pin_amount (number) images for the user's home feed",
             "schema": {
               "type": "array",
               "items": {
@@ -397,6 +471,10 @@ func init() {
       "type": "object",
       "properties": {
         "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
           "type": "string",
           "minLength": 1
         },

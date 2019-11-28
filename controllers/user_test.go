@@ -25,6 +25,9 @@ func (f fakeUserGetError) Get() (user *models.User, err error) {
 func (f fakeUserGetError) QueryPins() (pinIDs resources.Pins, err error) {
 	return
 }
+func (f fakeUserGetError) DeletePin(pinID string) (err error) {
+	return
+}
 
 func TestHandleUserCallGetError(t *testing.T) {
 	_, err := handleUserCall(fakeUserGetError{})
@@ -40,6 +43,9 @@ func (f fakeUserGet) Get() (user *models.User, err error) {
 	return
 }
 func (f fakeUserGet) QueryPins() (pinIDs resources.Pins, err error) {
+	return
+}
+func (f fakeUserGet) DeletePin(pinID string) (err error) {
 	return
 }
 

@@ -19,6 +19,7 @@ require (
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/naoina/denco v0.0.0-20180930074809-8475105a6b4c // indirect
+	github.com/rs/cors v1.7.0
 	go.mongodb.org/mongo-driver v1.1.3 // indirect
 	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914
 	golang.org/x/tools v0.0.0-20191122021335-f191eec95302 // indirect

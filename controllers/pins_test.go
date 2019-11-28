@@ -29,6 +29,9 @@ func (f fakePinsQueryError) QueryPins() (pinIDs resources.Pins, err error) {
 func (f fakePinsQueryError) Get() (user *models.User, err error) {
 	return
 }
+func (f fakePinsQueryError) DeletePin(pinID string) (err error) {
+	return
+}
 
 type fakePinsBatchGetNull struct{}
 
@@ -52,6 +55,9 @@ func (f fakePinsQueryGetNull) QueryPins() (pinIDs resources.Pins, err error) {
 	return
 }
 func (f fakePinsQueryGetNull) Get() (user *models.User, err error) {
+	return
+}
+func (f fakePinsQueryGetNull) DeletePin(pinID string) (err error) {
 	return
 }
 
@@ -79,6 +85,9 @@ func (f fakePinsQuery) QueryPins() (pinIDs resources.Pins, err error) {
 	return
 }
 func (f fakePinsQuery) Get() (user *models.User, err error) {
+	return
+}
+func (f fakePinsQuery) DeletePin(pinID string) (err error) {
 	return
 }
 
