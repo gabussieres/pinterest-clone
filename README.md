@@ -1,5 +1,20 @@
 # pinterest-clone
 
+**Running:**
+To start the frontend:
+
+1. cd client
+2. npm i
+3. npm start
+
+To start the backend:
+NOTE: the API is not hosted yet, so no data will appear on the frontend unless local dynamo is set up. I am currently working on hosting the backend on heroku.
+
+1. Go to root directory
+2. go get ./...
+3. go install ./cmd/pinterest-clone-server
+4. go run ./cmd/pinterest-clone-server/ --port 3001
+
 # Frontend
 
 The architecture comprises of React, Redux, reselect, sagas, and react-router.
