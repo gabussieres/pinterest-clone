@@ -1,7 +1,7 @@
 /* global process */
 /* global module */
 
-const URL = "http://127.0.0.1:3001";
+const URL = "https://morning-dawn-44308.herokuapp.com/";
 
 function checkStatus(response) {
   if (response.ok) {

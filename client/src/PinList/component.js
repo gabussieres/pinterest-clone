@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const Pin = styled.img`
   border-radius: 20px;
-  margin: 8px 8px 8px 10px;
-  width: 235px;
+  margin: 16px 9px 0px 9px;
+  width: 234px;
 `;
 
 const pin = p => (

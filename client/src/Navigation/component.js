@@ -8,6 +8,7 @@ const onSuccess = response => {
   console.log(response);
   return props => {
     // Ideally, I would authenticate here
+    // Instead we're going to default to user 'gabriel'
     props.fetchUser("gabriel");
   };
 };
@@ -29,7 +30,7 @@ const Navigation = props => (
           redirectUri=""
         />
       </NavButton>
-      <NavButton href="/gabriel">Gabriel</NavButton>
+      <NavButton href={`/${props.user.user.details.id}`}>Gabriel</NavButton>
       <NavButton home="true" href="/">
         Home
       </NavButton>

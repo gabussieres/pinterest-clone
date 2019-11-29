@@ -29,7 +29,7 @@ func NewDeletePin(ctx *middleware.Context, handler DeletePinHandler) *DeletePin 
 	return &DeletePin{Context: ctx, Handler: handler}
 }
 
-/*DeletePin swagger:route DELETE /pin pinterest deletePin
+/*DeletePin swagger:route GET /delete_pin pinterest deletePin
 
 DeletePin delete pin API
 

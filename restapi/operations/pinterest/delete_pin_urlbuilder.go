@@ -40,7 +40,7 @@ func (o *DeletePinURL) SetBasePath(bp string) {
 func (o *DeletePinURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/pin"
+	var _path = "/delete_pin"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)

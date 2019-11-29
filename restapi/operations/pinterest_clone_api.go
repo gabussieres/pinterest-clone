@@ -266,10 +266,10 @@ func (o *PinterestCloneAPI) initHandlerCache() {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
 
-	if o.handlers["DELETE"] == nil {
-		o.handlers["DELETE"] = make(map[string]http.Handler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["DELETE"]["/pin"] = pinterest.NewDeletePin(o.context, o.PinterestDeletePinHandler)
+	o.handlers["GET"]["/delete_pin"] = pinterest.NewDeletePin(o.context, o.PinterestDeletePinHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)

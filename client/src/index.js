@@ -8,6 +8,8 @@ import {
   useParams
 } from "react-router-dom";
 import styled from "styled-components";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { persistStore } from "redux-persist";
 
 import configureStore from "./store/configureStore.js";
 import Feed from "./pages/Feed";
@@ -15,6 +17,7 @@ import PinDetails from "./pages/PinDetails";
 import UserProfile from "./pages/UserProfile";
 
 const store = configureStore();
+const persistor = persistStore(store);
 
 function UserRoute() {
   let { user_id } = useParams();
@@ -53,9 +56,11 @@ function App() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router store={store}>
-      <App />
-    </Router>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router store={store}>
+        <App />
+      </Router>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

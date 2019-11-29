@@ -17,6 +17,10 @@ import (
 // swagger:model user
 type User struct {
 
+	// first name
+	// Min Length: 1
+	FirstName string `json:"first_name,omitempty"`
+
 	// followers
 	Followers int64 `json:"followers,omitempty"`
 
@@ -31,14 +35,18 @@ type User struct {
 	// Min Length: 1
 	ImageURL string `json:"image_url,omitempty"`
 
-	// name
+	// last name
 	// Min Length: 1
-	Name string `json:"name,omitempty"`
+	LastName string `json:"last_name,omitempty"`
 }
 
 // Validate validates this user
 func (m *User) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateFirstName(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
@@ -48,13 +56,26 @@ func (m *User) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateLastName(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *User) validateFirstName(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FirstName) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("first_name", "body", string(m.FirstName), 1); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -84,13 +105,13 @@ func (m *User) validateImageURL(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *User) validateName(formats strfmt.Registry) error {
+func (m *User) validateLastName(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Name) { // not required
+	if swag.IsZero(m.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("name", "body", string(m.Name), 1); err != nil {
+	if err := validate.MinLength("last_name", "body", string(m.LastName), 1); err != nil {
 		return err
 	}
 

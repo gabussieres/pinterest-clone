@@ -52,7 +52,10 @@ type fakeDBClientUserHappyPath struct{ DynamoInterface }
 func (f fakeDBClientUserHappyPath) GetItem(id string, tableConfig config.TableConfig) (out *dynamodb.GetItemOutput, err error) {
 	out = &dynamodb.GetItemOutput{
 		Item: map[string]*dynamodb.AttributeValue{
-			"name": {
+			"first_name": {
+				S: &testUserID,
+			},
+			"last_name": {
 				S: &testUserID,
 			},
 			"image_url": {
@@ -74,7 +77,7 @@ func TestGetUserHappyPath(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no error. Got %v", err)
 	}
-	expectedUser := &models.User{Name: testUserID, ImageURL: "image_url", Following: 1, Followers: 2}
+	expectedUser := &models.User{FirstName: testUserID, LastName: testUserID, ImageURL: "image_url", Following: 1, Followers: 2}
 	if !reflect.DeepEqual(user, expectedUser) {
 		t.Errorf("Expected %v. Got %v", expectedUser, user)
 	}

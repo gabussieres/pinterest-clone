@@ -2,7 +2,7 @@ import * as ActionTypes from "./actions";
 import { FetchStatus } from "../constants/entityStatus";
 
 const InitialState = {
-  user: {},
+  details: {},
   error: null,
   fetchStatus: FetchStatus.none
 };
@@ -12,7 +12,7 @@ export function user(state = InitialState, action) {
     case ActionTypes.FETCHING_USER: {
       return {
         ...state,
-        user: {},
+        details: {},
         fetchStatus: FetchStatus.loading,
         error: null
       };
@@ -20,7 +20,7 @@ export function user(state = InitialState, action) {
     case ActionTypes.FETCH_USER_SUCCESS: {
       return {
         ...state,
-        user: action.results,
+        details: action.results,
         fetchStatus: FetchStatus.loaded,
         error: null
       };
@@ -28,7 +28,7 @@ export function user(state = InitialState, action) {
     case ActionTypes.FETCH_USER_FAILURE: {
       return {
         ...state,
-        user: {},
+        details: {},
         fetchStatus: FetchStatus.failed,
         error: action.message
       };
