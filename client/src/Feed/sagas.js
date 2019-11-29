@@ -17,3 +17,11 @@ export function* fetchFeed(action) {
 export function* watchFetchFeed() {
   yield takeEvery(actions.FETCH_FEED, fetchFeed);
 }
+
+export function* resetFeed() {
+  yield put(actions.resetFeed());
+}
+
+export function* watchResetFeed() {
+  yield takeEvery(actions.RESET_FEED, resetFeed);
+}

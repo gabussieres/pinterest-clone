@@ -22,10 +22,9 @@ The architecture comprises of React, Redux, reselect, sagas, and react-router.
 
 ## Important considerations
 
-Here is a list of features that were not implemented or contain bugs due to contraints in the current implementation
+Here is a list of features that were not implemented:
 
 - Due to time constraints, Github login was added, but not authentication. Instead, on login, the client will default to a logged in status for the user Gabriel.
-- There is a bug where the "Delete Pin" button is visible on all pins, even though it only works on pins saved by the user.
 - Again, due to time constraints I was not able to reach the URL shortening portion of the challenge.
 - Finally, I had enough time to complete unit tests for the backend, but not for the frontend. I would have implemented them with Jest, as I have had experience building 200-300 Jest unit tests for an internal dashboard at my previous company.
 
@@ -62,7 +61,7 @@ There are 3 tables in DynamoDB:
 **pinterest_users**
 
 PK: id (string)
-Other Attributes: name, image_url, followers, following
+Other Attributes: first_name, last_name, image_url, followers, following
 
 **pinterest_pins**
 

@@ -4,10 +4,10 @@ import { createStructuredSelector } from "reselect";
 import Navigation from "./component.js";
 import user from "./selectors.js";
 
-import { fetchUser } from "./actions";
+import { fetchUser, fetchUserPins } from "./actions";
 
 const selectors = { user };
-const actions = { fetchUser };
+const actions = { fetchUser, fetchUserPins };
 
 export default connect(
   createStructuredSelector(selectors),

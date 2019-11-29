@@ -9,6 +9,14 @@ const InitialState = {
 
 export function userProfile(state = InitialState, action) {
   switch (action.type) {
+    case ActionTypes.FETCH_USER_PROFILE: {
+      return {
+        ...state,
+        user: {},
+        fetchStatus: FetchStatus.none,
+        error: null
+      };
+    }
     case ActionTypes.FETCHING_USER_PROFILE: {
       return {
         ...state,

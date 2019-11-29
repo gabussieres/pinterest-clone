@@ -8,27 +8,33 @@ import {
   LeftWrapper,
   Image,
   SourceUrl,
-  Title
+  Title,
+  SignInPrompt
 } from "./styles";
 
 class PinDetails extends Component {
   constructor(props) {
     super(props);
-    props.fetchPinDetails(props.pinId);
+    if (this.props.pinDetails.user.loggedIn) {
+      props.fetchPinDetails(props.pinId);
+    }
   }
 
   render() {
     const { details, error, fetchStatus } = this.props.pinDetails.pin;
+
     if (error != null) {
       return null;
     }
+
     const { title, description, image_url, source_url, id } = details;
     const handleClick = pinId => {
-      this.props.deletePin("gabriel", pinId);
+      this.props.deletePin(this.props.pinDetails.user.id, pinId);
     };
-    return fetchStatus === FetchStatus.loaded ? (
-      <Wrapper className="App">
-        <div>
+
+    return this.props.pinDetails.user.loggedIn ? (
+      fetchStatus === FetchStatus.loaded ? (
+        <Wrapper className="App">
           <Row>
             <Col lg={5}>
               <LeftWrapper>
@@ -40,13 +46,19 @@ class PinDetails extends Component {
                 <SourceUrl href={source_url}>{source_url}</SourceUrl>
                 <Title>{title}</Title>
                 <p>{description}</p>
-                <Button onClick={() => handleClick(id)}>Delete Pin</Button>
+                {this.props.pinDetails.user.pins.map(p => p.id).includes(id) ? (
+                  <Button onClick={() => handleClick(id)}>Delete Pin</Button>
+                ) : null}
               </RightWrapper>
             </Col>
           </Row>
-        </div>
-      </Wrapper>
-    ) : null;
+        </Wrapper>
+      ) : null
+    ) : (
+      <SignInPrompt>
+        <h1>Please sign in!</h1>
+      </SignInPrompt>
+    );
   }
 }
 

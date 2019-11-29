@@ -30,3 +30,7 @@ export const SourceUrl = styled.a`
 export const Title = styled.h1`
   font-weight: bold;
 `;
+
+export const SignInPrompt = styled.div`
+  text-align: center;
+`;

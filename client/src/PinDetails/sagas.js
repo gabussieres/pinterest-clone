@@ -7,7 +7,6 @@ export function* fetchPinDetails(action) {
   try {
     yield put(actions.fetchingPinDetails());
     const result = yield Api.fetchPinDetails(action.pin_id);
-    console.log(result);
 
     yield put(actions.fetchPinDetailsSuccess(result));
   } catch (e) {
@@ -23,7 +22,6 @@ export function* deletePin(action) {
   try {
     yield put(actions.deletingPin());
     const result = yield Api.deletePin(action.user_id, action.pin_id);
-    console.log(result);
 
     yield put(actions.deletePinSuccess(result));
   } catch (e) {

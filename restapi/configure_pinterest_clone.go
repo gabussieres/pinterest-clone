@@ -4,7 +4,6 @@ package restapi
 
 import (
 	"crypto/tls"
-	"fmt"
 	"net/http"
 
 	"github.com/rs/cors"
@@ -77,7 +76,6 @@ func configureAPI(api *operations.PinterestCloneAPI) http.Handler {
 	if api.PinterestUserHandler == nil {
 		api.PinterestUserHandler = pinterest.UserHandlerFunc(func(params pinterest.UserParams) middleware.Responder {
 			user, err := controllers.HandleUserCall(params)
-			fmt.Println(user, err)
 			if err != nil {
 				return pinterest.NewUserDefault(500)
 			}

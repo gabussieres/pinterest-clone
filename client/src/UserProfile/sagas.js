@@ -18,18 +18,17 @@ export function* watchFetchUserProfile() {
   yield takeEvery(actions.FETCH_USER_PROFILE, fetchUserProfile);
 }
 
-export function* fetchUserPins(action) {
+export function* fetchUserProfilePins(action) {
   try {
-    yield put(actions.fetchingUserPins());
+    yield put(actions.fetchingUserProfilePins());
     const result = yield Api.fetchUserPins(action.user_id);
 
-    yield put(actions.fetchUserPinsSuccess(result));
+    yield put(actions.fetchUserProfilePinsSuccess(result));
   } catch (e) {
-    console.log(e);
-    yield put(actions.fetchUserPinsFailure(e));
+    yield put(actions.fetchUserProfilePinsFailure(e));
   }
 }
 
-export function* watchFetchUserPins() {
-  yield takeEvery(actions.FETCH_USER_PINS, fetchUserPins);
+export function* watchFetchUserProfilePins() {
+  yield takeEvery(actions.FETCH_USER_PROFILE_PINS, fetchUserProfilePins);
 }

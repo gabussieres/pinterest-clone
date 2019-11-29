@@ -4,12 +4,14 @@ import GitHubLogin from "react-github-login";
 import logo_img from "../images/Logo.png";
 import { Nav, NavList, NavButton, LogoWrapper } from "./styles";
 
+const defaultUser = "gabriel";
+
 const onSuccess = response => {
-  console.log(response);
   return props => {
     // Ideally, I would authenticate here
-    // Instead we're going to default to user 'gabriel'
-    props.fetchUser("gabriel");
+    // Instead we're going to default to defaultUser
+    props.fetchUser(defaultUser);
+    props.fetchUserPins(defaultUser);
   };
 };
 const onFailure = response => console.error(response);
@@ -30,7 +32,9 @@ const Navigation = props => (
           redirectUri=""
         />
       </NavButton>
-      <NavButton href={`/${props.user.user.details.id}`}>Gabriel</NavButton>
+      <NavButton href={`/${props.user.user.details.id}`}>
+        {props.user.user.details.first_name}
+      </NavButton>
       <NavButton home="true" href="/">
         Home
       </NavButton>

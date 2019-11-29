@@ -7,6 +7,7 @@ import { PinList } from "../PinList/component";
 class Feed extends Component {
   constructor(props) {
     super(props);
+    props.resetFeed();
     props.fetchFeed(20);
 
     // This infinite scroll implementation was guided by this blog post
@@ -23,9 +24,11 @@ class Feed extends Component {
 
   render() {
     const { pins, error, fetchStatus } = this.props.feed.feed;
+
     if (error != null) {
       return null;
     }
+
     return PinList(pins, fetchStatus);
   }
 }

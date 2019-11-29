@@ -31,7 +31,7 @@ export function feed(state = InitialState, action) {
         error: action.message
       };
     }
-    case ActionTypes.FETCHING_USER_PINS: {
+    case ActionTypes.FETCHING_USER_PROFILE_PINS: {
       return {
         ...state,
         pins: [],
@@ -39,7 +39,7 @@ export function feed(state = InitialState, action) {
         error: null
       };
     }
-    case ActionTypes.FETCH_USER_PINS_SUCCESS: {
+    case ActionTypes.FETCH_USER_PROFILE_PINS_SUCCESS: {
       return {
         ...state,
         pins: action.results,
@@ -47,12 +47,20 @@ export function feed(state = InitialState, action) {
         error: null
       };
     }
-    case ActionTypes.FETCH_USER_PINS_FAILURE: {
+    case ActionTypes.FETCH_USER_PROFILE_PINS_FAILURE: {
       return {
         ...state,
         pins: [],
         fetchStatus: FetchStatus.failed,
         error: action.message
+      };
+    }
+    case ActionTypes.RESET_FEED: {
+      return {
+        ...state,
+        pins: [],
+        fetchStatus: FetchStatus.none,
+        error: null
       };
     }
     default: {
