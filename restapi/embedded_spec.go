@@ -34,41 +34,6 @@ func init() {
     "version": "1.0.0"
   },
   "paths": {
-    "/delete_pin": {
-      "get": {
-        "tags": [
-          "pinterest"
-        ],
-        "operationId": "delete_pin",
-        "parameters": [
-          {
-            "type": "string",
-            "format": "string",
-            "name": "pin_id",
-            "in": "query",
-            "required": true
-          },
-          {
-            "type": "string",
-            "format": "string",
-            "name": "user_id",
-            "in": "query",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "pin is deleted"
-          },
-          "default": {
-            "description": "error",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        }
-      }
-    },
     "/feed": {
       "get": {
         "tags": [
@@ -124,6 +89,39 @@ func init() {
             "schema": {
               "$ref": "#/definitions/pin"
             }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pinterest"
+        ],
+        "operationId": "delete_pin",
+        "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_id",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "format": "string",
+            "name": "user_id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pin is deleted"
           },
           "default": {
             "description": "error",
@@ -255,6 +253,10 @@ func init() {
         "following": {
           "type": "integer",
           "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
         },
         "image_url": {
           "type": "string",
@@ -285,41 +287,6 @@ func init() {
     "version": "1.0.0"
   },
   "paths": {
-    "/delete_pin": {
-      "get": {
-        "tags": [
-          "pinterest"
-        ],
-        "operationId": "delete_pin",
-        "parameters": [
-          {
-            "type": "string",
-            "format": "string",
-            "name": "pin_id",
-            "in": "query",
-            "required": true
-          },
-          {
-            "type": "string",
-            "format": "string",
-            "name": "user_id",
-            "in": "query",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "pin is deleted"
-          },
-          "default": {
-            "description": "error",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        }
-      }
-    },
     "/feed": {
       "get": {
         "tags": [
@@ -375,6 +342,39 @@ func init() {
             "schema": {
               "$ref": "#/definitions/pin"
             }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pinterest"
+        ],
+        "operationId": "delete_pin",
+        "parameters": [
+          {
+            "type": "string",
+            "format": "string",
+            "name": "pin_id",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "format": "string",
+            "name": "user_id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pin is deleted"
           },
           "default": {
             "description": "error",
@@ -506,6 +506,10 @@ func init() {
         "following": {
           "type": "integer",
           "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
         },
         "image_url": {
           "type": "string",

@@ -23,6 +23,10 @@ type User struct {
 	// following
 	Following int64 `json:"following,omitempty"`
 
+	// id
+	// Min Length: 1
+	ID string `json:"id,omitempty"`
+
 	// image url
 	// Min Length: 1
 	ImageURL string `json:"image_url,omitempty"`
@@ -36,6 +40,10 @@ type User struct {
 func (m *User) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateImageURL(formats); err != nil {
 		res = append(res, err)
 	}
@@ -47,6 +55,19 @@ func (m *User) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *User) validateID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ID) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("id", "body", string(m.ID), 1); err != nil {
+		return err
+	}
+
 	return nil
 }
 

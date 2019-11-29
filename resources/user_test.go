@@ -100,11 +100,11 @@ func (f fakeDBClientUserPinsHappyPath) Query(id string, tableConfig config.Table
 	out = &dynamodb.QueryOutput{
 		Items: []map[string]*dynamodb.AttributeValue{{
 			"pin_id": {
-				N: &testPinID1,
+				S: &testPinID1,
 			},
 		}, {
 			"pin_id": {
-				N: &testPinID2,
+				S: &testPinID2,
 			},
 		}},
 	}
